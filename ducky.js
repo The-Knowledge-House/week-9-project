@@ -7,9 +7,18 @@ window.onload = function() {
   // ( 1. create the element
   //   2. add a class to the element
   //   3. append the element to the body )
+  
+  let duckElement = document.createElement("div");
+  duckElement.classList.add("duck");
+  
+  document.body.appendChild(duckElement);
 
   // 2. Next, use setInterval to toggle the "flap" class on the duck every 250 ms (1/4 second)
   // https://www.w3schools.com/jsref/met_win_setinterval.asp
+  let flapWings = setInterval(function flapping() {
+    duck.classList.toggle('flap');
+  }, 250);
+
 
   // 3. Now, let's move the duck using CSS "top" and "left". Create
   // a function `moveDuck` that takes a duck object as an argument and sets the
@@ -17,7 +26,17 @@ window.onload = function() {
   // HINT: Use Math.random() * window.innerWidth    for "left"
   //       And Math.random() * window.innerHeight   for "top"
 
-  // 4. Try making the duck move to a different location every second (what did we use to do this several lines up??)
+  function moveDuck() { 
+    duck.style.left = Math.random() * window.innerWidth + "px";
+    duck.style.top = Math.random() * window.innerHeight + "px";
+  }
+
+
+  /* 4. Try making the duck move to a different location every second (what did we 
+  use to do this several lines up ??) */
+
+  let duckMove = setInterval(moveDuck, 800);
+
 
   // 5. Congratulations! Move on to part 2!
 
@@ -42,12 +61,15 @@ window.onload = function() {
   // 11. BOOM. Attach a "click" handler that adds the "shot" class to
   //     the duck when you click on it!
 
-  // 12. After a duck has been clicked on, remove it from the DOM after
+  /* 12. After a duck has been clicked on, remove it from the DOM after
   //     a short delay (1 second) Hint Hint...use setTimeout
-  //     as for removing the element check out https://dzone.com/articles/removing-element-plain
+  //     as for removing the element check out 
+  https://dzone.com/articles/removing-element-plain
+  */
 
-  // 13. Create a new function named checkForWinner() that reads the DOM
-  //     to see if there are any ducks left. (How can we check the DOM for more than one element?, and how can we see how many elements we get back) If not, alert "YOU WIN!"
+  /* 13. Create a new function named checkForWinner() that reads the DOM
+  //     to see if there are any ducks left. (How can we check the DOM for more than 
+  one element ?, and how can we see how many elements we get back) If not, alert "YOU WIN!" */
 
   // 14. BONUS: The ducks are moving pretty erratically, can you think
   //     of a way to adjust the ducks speed based on how far needs to move?
