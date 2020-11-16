@@ -1,23 +1,20 @@
-window.onload = function() {
-  const body = document.body;
-
-  console.log(body);
 
   // 1. Create a <div> with the class "duck" and add it to the body.  Do this step by step
   // ( 1. create the element
   //   2. add a class to the element
   //   3. append the element to the body )
   
-  let duckElement = document.createElement("div");
-  duckElement.classList.add("duck");
+  // let duckElement = document.createElement("div");
+  // duckElement.classList.add("duck");
   
-  document.body.appendChild(duckElement);
+  // document.body.appendChild(duckElement);
 
   // 2. Next, use setInterval to toggle the "flap" class on the duck every 250 ms (1/4 second)
   // https://www.w3schools.com/jsref/met_win_setinterval.asp
-  let flapWings = setInterval(function flapping() {
-    duck.classList.toggle('flap');
-  }, 250);
+
+  // let flapWings = setInterval(function flapping() {
+  //   duckElement.classList.toggle('flap');
+  // }, 250);
 
 
   // 3. Now, let's move the duck using CSS "top" and "left". Create
@@ -26,16 +23,16 @@ window.onload = function() {
   // HINT: Use Math.random() * window.innerWidth    for "left"
   //       And Math.random() * window.innerHeight   for "top"
 
-  function moveDuck() { 
-    duck.style.left = Math.random() * window.innerWidth + "px";
-    duck.style.top = Math.random() * window.innerHeight + "px";
-  }
+  // function moveDuck() { 
+  //   duckElement.style.left = Math.random() * window.innerWidth + "px";
+  //   duckElement.style.top = Math.random() * window.innerHeight + "px";
+  // }
 
 
   /* 4. Try making the duck move to a different location every second (what did we 
   use to do this several lines up ??) */
 
-  let duckMove = setInterval(moveDuck, 800);
+  // let duckMove = setInterval(moveDuck, 800);
 
 
   // 5. Congratulations! Move on to part 2!
@@ -48,7 +45,7 @@ window.onload = function() {
 
   // 7. Now, let's create lots of ducks!  Use a "for" loop to create 5 ducks
   //    using our fancy new createDuck() function
-
+  
   // 8. The ducks are overlapping.  Modify createDuck so each time
   //     it creates a duck, it appears in a random location
   // HINT: You may want to create a `randomPosition()` function that you can use
@@ -78,4 +75,48 @@ window.onload = function() {
   //     direction the duck is flying and change the way the duck is facing
 
   // Done, you have accomplish another level of skill
+
+  window.onload = function() {
+    const body = document.body;
+  
+    console.log(body);
+
+  function createDuck() { 
+    let duckElement = document.createElement("div");
+    duckElement.classList.add("duck");    
+    document.body.appendChild(duckElement);
+
+    let flapWings = setInterval(function flapping() {
+      duckElement.classList.toggle('flap');
+    }, 250);
+
+    function moveDuck() { 
+      duckElement.style.left = Math.random() * window.innerWidth + "px";
+      duckElement.style.top = Math.random() * window.innerHeight + "px";
+
+      function shotDuck() { 
+        duckElement.classList.add("shot");
+        setTimeout(function () { 
+          duckElement.remove();
+          checkForWinner()
+        }, 300)
+      }
+      duckElement.addEventListener('click', shotDuck);
+    }
+
+    moveDuck();
+    let duckMove = setInterval(moveDuck, 800);
+    return duckElement;
+
+  };
+
+  for (let i = 0; i < 5; i++) { 
+    createDuck();
+  }
+
+  function checkForWinner() {
+    if (document.getElementsByClassName('duck').length === 0) {
+      alert("You're the winner!");
+    }
+  }
 };
