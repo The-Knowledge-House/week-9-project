@@ -1,7 +1,16 @@
-window.onload = function() {
+window.onload = function () {
   const body = document.body;
 
   console.log(body);
+
+  const duck = document.createElement("div");
+  duck.className = "duck";
+  duck.style.top = Math.random() * window.innerWidth + "px";
+  duck.style.left = Math.random() * window.innerHeight + "px";
+  document.body.appendChild(duck);
+  setTimeout(function () {
+    duck.remove();
+  }, 1);
 
   // 1. Create a <div> with the class "duck" and add it to the body.  Do this step by step
   // ( 1. create the element
@@ -22,23 +31,57 @@ window.onload = function() {
   // 5. Congratulations! Move on to part 2!
 
   // ---------------------------- PART 2 ---------------------------------
+  function createDuck() {
+    const duck = document.createElement("div");
+    duck.className = "duck";
+    duck.style.top = Math.random() * window.innerWidth + "px";
+    duck.style.left = Math.random() * window.innerHeight + "px";
+    document.body.appendChild(duck);
+    let flapper = setInterval(function flapDuck() {
+      duck.classList.toggle("flap");
+    }, 250);
+    function moveDuck() {
+      let top = Math.random() * window.innerWidth;
+      let left = Math.random() * window.innerHeight;
+      duck.style.top = top + "px";
+      duck.style.left = left + "px";
 
-  // 6. Now we will organize this better. Let's create
-  //    a "function" called createDuck() that does everything in 1-4
-  //    and "returns" the duck object
+      // 6. Now we will organize this better. Let's create
+      //    a "function" called createDuck() that does everything in 1-4
+      //    and "returns" the duck object
 
-  // 7. Now, let's create lots of ducks!  Use a "for" loop to create 5 ducks
-  //    using our fancy new createDuck() function
+      // 7. Now, let's create lots of ducks!  Use a "for" loop to create 5 ducks
+      //    using our fancy new createDuck() function
 
-  // 8. The ducks are overlapping.  Modify createDuck so each time
-  //     it creates a duck, it appears in a random location
-  // HINT: You may want to create a `randomPosition()` function that you can use
-  //       to set the ducks' initial locations and in your `moveDuck()` function;
+      // 8. The ducks are overlapping.  Modify createDuck so each time
+      //     it creates a duck, it appears in a random location
+      // HINT: You may want to create a `randomPosition()` function that you can use
+      //       to set the ducks' initial locations and in your `moveDuck()` function;
 
-  // 9. Keep going! Move onto part 3!
+      // 9. Keep going! Move onto part 3!
 
-  // --------------------------- PART 3 ------------------------------------
-
+      // --------------------------- PART 3 ------------------------------------
+      function addShot() {
+        duck.classList.add("shot");
+        setTimeout(function () {
+          duck.remove();
+          checkForWinner();
+        }, 1000);
+      }
+      duck.addEventListener("click", addShot);
+    }
+    moveDuck();
+    let mover = setInterval(moveDuck, 1000);
+    return duck;
+  }
+  for (let i = 0; i < 5; i++) {
+    createDuck();
+  }
+  function checkForWinner() {
+    if (document.getElementsByClassName("duck").length == 0) {
+      alert("You win!");
+    }
+  }
   // 11. BOOM. Attach a "click" handler that adds the "shot" class to
   //     the duck when you click on it!
 
