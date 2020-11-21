@@ -14,7 +14,6 @@ html {
   -ms-interpolation-mode: bicubic;
   overflow: hidden;
 }
-
 .duck {
   position: absolute;
   background-image: url(images/duckhunt.png);
@@ -27,7 +26,6 @@ html {
   transition-timing-function: linear;
   background-repeat: no-repeat;
 }
-
 .duck.right {
   background-position: -200px -160px;
 }
