@@ -3,12 +3,13 @@ window.onload = function() {
 
   console.log(body);
 
-  // 1. Create a <div> with the class "duck" and add it to the body.  Do this step by step
+  // 1. Create a <div> with the class "duck" and add it to the body.  
+  //Do this step by step
   // ( 1. create the element
   //   2. add a class to the element
   //   3. append the element to the body )
 
-  // 2. Next, use setInterval to toggle the "flap" class on the duck every 250 ms (1/4 second)
+    // 2. Next, use setInterval to toggle the "flap" class on the duck every 250 ms (1/4 second)
   // https://www.w3schools.com/jsref/met_win_setinterval.asp
 
   // 3. Now, let's move the duck using CSS "top" and "left". Create
@@ -17,9 +18,22 @@ window.onload = function() {
   // HINT: Use Math.random() * window.innerWidth    for "left"
   //       And Math.random() * window.innerHeight   for "top"
 
-  // 4. Try making the duck move to a different location every second (what did we use to do this several lines up??)
+  // 4. Try making the duck move to a different location every second 
+  //(what did we use to do this several lines up??)
 
   // 5. Congratulations! Move on to part 2!
+
+  const duck = document.createElement("div");
+  duck.className = "duck";
+  duck.style.top = Math.random() * window.innerWidth + "px";
+  duck.style.left = Math.random() * window.innerHeight + "px";
+  document.body.appendChild(duck);
+  setTimeout(function () {
+    duck.remove();
+  }, 1);
+
+
+
 
   // ---------------------------- PART 2 ---------------------------------
 
@@ -37,6 +51,28 @@ window.onload = function() {
 
   // 9. Keep going! Move onto part 3!
 
+  function createDuck() {
+    const duck = document.createElement('div');
+    duck.className = 'duck';
+    duck.style.top = Math.random() * window.innerWidth + 'px';
+    duck.style.left = Math.random() * window.innerHeight + 'px';
+
+    document.body.appendChild(duck);
+    let flapper = setInterval(function flapDuck() {
+        duck.classList.toggle('flap');
+    }, 250);
+//not sure if this should go in the createDuck() function
+    for(let i = 0; i < 5; i++){
+      createDuck();
+    }
+
+//function randomPosition() {}
+function moveDuck() {
+  let top = Math.random() * window.innerWidth;
+  let left = Math.random() * window.innerHeight;
+  duck.style.top = top + "px";
+  duck.style.left = left + "px";
+};
   // --------------------------- PART 3 ------------------------------------
 
   // 11. BOOM. Attach a "click" handler that adds the "shot" class to
@@ -51,9 +87,32 @@ window.onload = function() {
 
   // 14. BONUS: The ducks are moving pretty erratically, can you think
   //     of a way to adjust the ducks speed based on how far needs to move?
-
+ 
   // 15. BONUS: Add the "left" and "right" class to the duck based on the
   //     direction the duck is flying and change the way the duck is facing
 
   // Done, you have accomplish another level of skill
-};
+
+
+function addShot() {
+  duck.classList.add("shot");
+  setTimeout(function () {
+    duck.remove();
+    checkForWinner();
+  }, 1000);
+}
+duck.addEventListener("click", addShot);
+}
+moveDuck();
+let mover = setInterval(moveDuck, 1000);
+return duck;
+
+function checkForWinner() {
+  if (document.getElementsByClassName("duck").length == 0) {
+  alert("Congrats, you win!!");
+  }
+  }
+
+}
+
+
